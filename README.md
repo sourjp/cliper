@@ -2,8 +2,6 @@
 ## Overview
 Cliper save your text. The file is saved at ~/.cliper.txt.
 
-The name come from clip + py.
-
 ## Demo
 
 ## Description
