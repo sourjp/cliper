@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+import argparse
+import os
+
+
+def show_func():
+    with open(filename, 'r') as f:
+        all_data = []
+
+        for index, data in enumerate(f, start=1):
+            message = '{}: {}'.format(index, data)
+            all_data.append(message)
+
+    return all_data
+
+
+def copy_func(copy_data):
+    with open(filename, 'a') as f:
+        f.write(copy_data + '\n')
+
+    return 'Copied!!'
+
+
+def paste_func(paste_num):
+    return_data = 'There is no value data.\n'
+    with open(filename, 'r') as f:
+        for index, data in enumerate(f, start=1):
+            if index == paste_num:
+                return_data = data
+
+    return return_data
+
+
+def delete_func(delete_num):
+    saving_data = []
+    found = False
+
+    with open(filename, 'r') as f:
+        for index, data in enumerate(f, start=1):
+            if index != delete_num:
+                saving_data.append(data)
+            else: found = True
+
+    with open(filename, 'w') as f:
+        for data in saving_data:
+            f.write(data)
+
+    if found: response = 'Deleted!!'
+    else: response = 'There is no value data.'
+
+    return response
+
+
+if __name__ == "__main__":
+    get_home_dir = os.environ['HOME']
+    filename = get_home_dir + '/.cliper.txt'
+    file_checker = os.path.exists(filename)
+
+    if not file_checker:
+        with open(filename, 'w') as f:
+            pass
+
+    description = 'Cliper save your text.' \
+                  + 'The file is saved at ~/.cliper.txt.' \
+                  + 'Cliper shows whole of saved keywords as a default.'
+
+    parser = argparse.ArgumentParser(description=description)
+
+    parser.add_argument('-c', '--copy', type=str,
+                        help='Copy the keyward from stdin.')
+    parser.add_argument('-p', '--paste', type=int,
+                        help='Print the specific keyward.')
+    parser.add_argument('-d', '--delete', type=int,
+                        help='Delete the copied keyword.')
+
+    args = parser.parse_args()
+
+    if args.copy:
+        print(copy_func(args.copy))
+
+    elif args.paste:
+        print(paste_func(args.paste), end='')
+
+    elif args.delete:
+        print(delete_func(args.delete))
+
+    else:
+        for data in show_func():
+            print(data, end='')
