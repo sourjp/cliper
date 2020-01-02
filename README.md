@@ -3,7 +3,7 @@
 Cliper save your text. The file is saved at ~/.cliper.txt.
 
 ## Demo
-<img src="https://github.com/sourjp/cliper/blob/master/resources/demo_cliper.gif" width="200">
+<img src="https://github.com/sourjp/cliper/blob/master/resources/demo_cliper.gif" width="600">
 
 ## Description
 Save your keywords that you can't remember but you use sometime. The goal of this tool is useful for the person who don't want to open other tool.
